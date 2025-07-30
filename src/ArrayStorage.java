@@ -8,13 +8,28 @@ public class ArrayStorage {
     }
 
     void save(Resume r) {
+        for (Resume res : storage) {
+            if (res == null) {
+                res = r;
+                break;
+            }
+        }
     }
 
     Resume get(String uuid) {
-        return null;
+        Resume g = new Resume();
+        for (int i = 0; i < storage.length - 1; i++) {
+            if (storage[i].toString() == uuid) {
+                g = storage[i];
+            } else {
+                g = null;
+            }
+        }
+        return g;
     }
 
     void delete(String uuid) {
+
     }
 
     /**
@@ -25,6 +40,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        return 0;
+        return storage.length;
     }
 }
