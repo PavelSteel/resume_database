@@ -24,10 +24,15 @@ public class ArrayStorage {
     Resume get(String uuid) {
         Resume g = new Resume();
         for (int i = 0; i < storage.length - 1; i++) {
-            if (storage[i].toString().equals(uuid)) {
-                g = storage[i];
-            } else {
-                g = null;
+            try {
+                if (storage[i].uuid.equals(uuid)) {
+                    g = storage[i];
+                    break;
+                } else {
+                    g.uuid = "Is not available!";
+                }
+            } catch (NullPointerException e) {
+
             }
         }
         return g;
