@@ -8,19 +8,18 @@ public class ArrayStorage {
     int size = 0;
 
     void clear() {
-        for (int i = 0; i < storage.length - 1; i++) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
         size = 0;
     }
 
     void save(Resume r) {
-        for (int i = 0; i < storage.length - 1; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                size++;
-                break;
-            }
+        if (size < storage.length) {
+            storage[size] = r;
+            size++;
+        } else {
+            System.out.println("Array is full!");
         }
     }
 
@@ -35,16 +34,15 @@ public class ArrayStorage {
 
     void delete(String uuid) {
         for (int i = 0; i < size; i++) {
-            if (i != storage.length - 1) {
-                if (storage[i].uuid.equals(uuid)) {
-                    for (int j = i; j < storage.length - 1; j++) {
-                        storage[j] = storage[j + 1];
-                    }
-                    size--;
+            if (storage[i].uuid.equals(uuid)) {
+                if (i == size - 1) {
+                    storage[i] = null;
+                } else {
+                    storage[i] = storage[size - 1];
+                    storage[size - 1] = null;
                 }
-            } else {
-                storage[i] = null;
                 size--;
+                break;
             }
         }
     }
